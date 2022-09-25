@@ -20,7 +20,7 @@ namespace flower
 		using Lua_state = std::unique_ptr<lua_State, decltype(lua_close)*>;
 
 	public:
-		explicit Config(std::filesystem::path config_path)
+		explicit Config(const std::filesystem::path& config_path)
 		{
 			luaL_openlibs(lua_state.get());
 	
@@ -29,6 +29,8 @@ namespace flower
 				throw std::runtime_error("Could not open config file");
 			}
 		}
+
+		
 
 	private:
 		const Lua_state lua_state{ luaL_newstate(), lua_close };
