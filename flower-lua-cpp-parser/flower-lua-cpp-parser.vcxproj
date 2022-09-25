@@ -22,6 +22,9 @@
     <ClCompile Include="src\lua_parser.ixx" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.lua" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -109,10 +112,15 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\hope\Documents\Libraries\lua-5.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableModules>true</EnableModules>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\hope\Documents\Libraries\lua-5.4.2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>"C:\Users\hope\Documents\Libraries\lua-5.4.2\lua54.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,12 +132,17 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\hope\Documents\Libraries\lua-5.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableModules>true</EnableModules>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\hope\Documents\Libraries\lua-5.4.2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>"C:\Users\hope\Documents\Libraries\lua-5.4.2\lua54.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
