@@ -2,39 +2,35 @@ export module lua_parser;
 
 import <memory>;
 import <lua.hpp>;
+import <filesystem>;
 import <string_view>;
 
-export namespace flower
+namespace flower
 {
-	constexpr auto can_file_be_read
-	{   
+	static constexpr auto can_file_be_read
+	{
 		[](auto lua_state, auto path)
-		{ 
-			if (luaL_loadfile(lua_state, path))
-			{
-				return false;
-			}
-
-			if (lua_pcall(lua_state, 0, LUA_MULTRET, 0))
-			{
-				return false;
-			}
-
-			return true;
+		{
+			return luaL_dofile(lua_state, path) ? false : true;
 		}
 	};
 
-	[[nodiscard]] auto load_config(std::string_view path) -> int
+	export class Config final
 	{
 		using Lua_state = std::unique_ptr<lua_State, decltype(lua_close)*>;
-		const auto lua_state { Lua_state { luaL_newstate(), lua_close } };
 
-		luaL_openlibs(lua_state.get());
-
-		if (can_file_be_read(lua_state.get(), path.data()))
+	public:
+		explicit Config(std::filesystem::path config_path)
 		{
-			lua_getglobal(lua_state.get(), "speed");
-			return static_cast<int>(lua_tonumber(lua_state.get(), -1));
+			luaL_openlibs(lua_state.get());
+	
+			if (!can_file_be_read(lua_state.get(), config_path.string().c_str()))
+			{
+				throw std::runtime_error("Could not open config file");
+			}
 		}
-	}
+
+	private:
+		const Lua_state lua_state{ luaL_newstate(), lua_close };
+	};
 }
