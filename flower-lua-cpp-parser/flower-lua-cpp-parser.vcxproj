@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\lua_parser.cpp" />
     <ClCompile Include="src\lua_parser.ixx" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
