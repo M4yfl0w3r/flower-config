@@ -4,7 +4,6 @@ module;
 
 export module lua_parser;
 
-import <format>;
 import <filesystem>;
 
 namespace flower
