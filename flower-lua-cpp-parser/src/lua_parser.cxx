@@ -16,8 +16,8 @@ static constexpr auto can_file_be_read
 	{
 		return luaL_dofile(lua_state, path) ? false : true;
 	}
-};
-
+};	
+	
 Config::Config(const std::filesystem::path& config_path)
 {
 	luaL_openlibs(lua_state.get());
@@ -31,9 +31,9 @@ Config::Config(const std::filesystem::path& config_path)
 
 auto Config::print_stack() const -> void
 {
-	const auto top { lua_gettop(lua_state.get()) };
+	const auto top = lua_gettop(lua_state.get());
 
-	for (auto ix { 1u }; ix <= top; ++ix)
+	for (auto ix = 1u; ix <= top; ++ix)
 	{
 		switch (lua_type(lua_state.get(), ix))
 		{
