@@ -24,7 +24,7 @@
     <ClCompile Include="src\lua_parser.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="helpers.ixx">
+    <ClCompile Include="src\helpers.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
