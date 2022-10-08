@@ -4,47 +4,53 @@ module;
 
 export module lua_parser;
 
+import helpers;
 import <filesystem>;
-import <string_view>;
-import <optional>;
+import <variant>;
+import <iostream>;
+
+using Lua_state = std::unique_ptr<lua_State, decltype(lua_close)*>;
 
 namespace flower
 {
-	constexpr auto get_number = []<typename Type>(lua_State* lua_state, std::string_view value_name)
-	{
-		lua_getglobal(lua_state, value_name.data());
-
-		if (lua_isinteger(lua_state, -1))
-		{
-			return static_cast<Type>(lua_tointeger(lua_state, -1));
-		}
-
-		else if (lua_isboolean(lua_state, -1))
-		{
-			return static_cast<Type>(lua_toboolean(lua_state, -1));
-		}
-
-		else if (lua_isnumber(lua_state, -1))
-		{
-			return static_cast<Type>(lua_tonumber(lua_state, -1));
-		}
-
-		return Type{};
-	};
-
 	export class Config final
 	{
-		using Lua_state = std::unique_ptr<lua_State, decltype(lua_close)*>;
-
 	public:
 		explicit Config(const std::filesystem::path&);
 
 		auto print_stack() const -> void;
 
-		[[nodiscard]] auto get_value(std::string_view value_name) const
+		auto load_value(auto& value, std::string_view value_name) const
 		{
-			return get_number.template operator() <float> (lua_state.get(), value_name);
+			const auto result = helpers::get_number(lua_state.get(), value_name);
+			
+			if (std::holds_alternative<int>(result))
+			{
+				value = std::get<int>(result);
+			}
+			
+			else if (std::holds_alternative<float>(result))
+			{
+				value = std::get<float>(result);
+			}
+			
+			else if (std::holds_alternative<bool>(result))
+			{
+				value = std::get<bool>(result);
+			}
 		}
+
+		auto load_values() const
+		{
+			load_value(speed, "speed");
+			load_value(position, "position");
+			load_value(alive, "alive");
+		}
+
+		static inline auto speed = int{};
+		static inline auto position = float{};
+		static inline auto alive = bool{};
+		static inline auto name = std::string{};
 
 	private:
 		const Lua_state lua_state{ luaL_newstate(), lua_close };

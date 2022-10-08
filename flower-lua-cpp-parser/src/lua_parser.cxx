@@ -4,28 +4,19 @@ module;
 
 module lua_parser;
 
+import helpers;
 import <string>;
 import <format>;
 import <iostream>;
 
 using namespace flower;
-
-static constexpr auto can_file_be_read
-{
-	[](const auto& lua_state, const auto& path)
-	{
-		return luaL_dofile(lua_state, path) ? false : true;
-	}
-};	
 	
 Config::Config(const std::filesystem::path& config_path)
 {
 	luaL_openlibs(lua_state.get());
 
-	if (can_file_be_read(lua_state.get(), config_path.string().c_str()))
+	if (helpers::can_file_be_read(lua_state.get(), config_path.string().c_str()))
 	{
-		lua_getglobal(lua_state.get(), "speed");
-		lua_getglobal(lua_state.get(), "alive");
 	}
 }
 

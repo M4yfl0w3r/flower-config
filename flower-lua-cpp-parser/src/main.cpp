@@ -1,13 +1,16 @@
 import lua_parser;
 
-namespace FL = flower;
+namespace fl = flower;
 
-#include <iostream>
-#include <string_view>
+import <iostream>;
 
 auto main() -> int
 {
-	FL::Config config{ "./config.lua" };
+	fl::Config config{ "./config.lua" };
 
-	std::cout << config.get_value("speed");
+	config.load_values();
+
+	std::cout << "Speed = " << fl::Config::speed << '\n';
+	std::cout << "Position = " << fl::Config::position << '\n';
+	std::cout << "Alive = " << std::boolalpha << fl::Config::alive << '\n';
 }
