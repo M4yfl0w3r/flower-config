@@ -15,8 +15,9 @@ Config::Config(const std::filesystem::path& config_path)
 {
 	luaL_openlibs(lua_state.get());
 
-	if (helpers::can_file_be_read(lua_state.get(), config_path.string().c_str()))
+	if (!helpers::can_file_be_read(lua_state.get(), config_path.string().c_str()))
 	{
+		lua_close(lua_state.get());
 	}
 }
 

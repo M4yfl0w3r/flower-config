@@ -40,11 +40,19 @@ namespace flower
 			}
 		}
 
+		auto load_value(std::string& value, std::string_view value_name) const
+		{
+			lua_getglobal(lua_state.get(), value_name.data());
+
+			value = lua_tostring(lua_state.get(), -1);
+		}
+
 		auto load_values() const
 		{
 			load_value(speed, "speed");
 			load_value(position, "position");
 			load_value(alive, "alive");
+			load_value(name, "name");
 		}
 
 		static inline auto speed = int{};
