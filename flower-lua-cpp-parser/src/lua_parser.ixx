@@ -53,12 +53,14 @@ namespace flower
 			load_value(position, "position");
 			load_value(alive, "alive");
 			load_value(name, "name");
+			load_value(fragShader, "fragShader");
 		}
 
 		static inline auto speed = int{};
 		static inline auto position = float{};
 		static inline auto alive = bool{};
 		static inline auto name = std::string{};
+		static inline auto fragShader = std::string{};
 
 	private:
 		const Lua_state lua_state{ luaL_newstate(), lua_close };
