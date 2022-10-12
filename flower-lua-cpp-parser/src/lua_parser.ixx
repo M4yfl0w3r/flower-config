@@ -13,7 +13,7 @@ using Lua_state = std::unique_ptr<lua_State, decltype(lua_close)*>;
 
 namespace flower
 {
-	export class Config final
+	export class Config 
 	{
 	public:
 		explicit Config(const std::filesystem::path&);

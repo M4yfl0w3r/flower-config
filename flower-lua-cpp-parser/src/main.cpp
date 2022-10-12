@@ -6,7 +6,7 @@ import <iostream>;
 
 auto main() -> int
 {
-	fl::Config config{ "./config.lua" };
+	fl::Config config { "./config.lua" };
 
 	config.load_values();
 
@@ -15,4 +15,5 @@ auto main() -> int
 	std::cout << std::boolalpha << std::format("Alive = {}\n", fl::Config::alive);
 	std::cout << std::format("Name = {}\n\n", fl::Config::name);
 	std::cout << std::format("{}\n", fl::Config::fragShader);
+
 }
