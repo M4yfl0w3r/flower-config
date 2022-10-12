@@ -1,13 +1,13 @@
 module;
 
 #include <lua.hpp>
+#include <string>
+#include <format>
+#include <iostream>
 
 module lua_parser;
 
 import helpers;
-import <string>;
-import <format>;
-import <iostream>;
 
 using namespace flower;
 	
