@@ -1,12 +1,2 @@
-speed = 5 
-position = 4.2
-alive = true
-name = "Test"
-
-fragShader = [[
-in vec4 vertexColor;
-
-void main()
-{
-    FragColor = vertexColor;
-}]]
+pos3 = { 5, 2, 3 }
+pos4 = { 6, 5, 4, 3}
